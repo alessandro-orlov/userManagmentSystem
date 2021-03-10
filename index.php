@@ -1,6 +1,8 @@
 <?php
 include __DIR__.'/helper_functions.php';
-//insertNewUser(1, $conn);
+
+$page = $_SERVER['PHP_SELF'];
+
 ?>
 <!doctype html>
 <html lang="en" class="h-100">

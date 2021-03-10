@@ -1,5 +1,20 @@
 <?php
-$page = $_SERVER['PHP_SELF'];
+
+$recordsPerPage = getParams('recordsPerPage', 10);
+$orderDir = getParams('orderDir', 'DESC' );
+
+$orderClass = $orderDir;
+
+$orderDir = $orderDir == "ASC" ? "DESC" : "ASC";
+
+$orderBy = getParams('orderBy', 'id');
+
+$params = [
+        'orderDir' => $orderDir,
+        'orderBy' => $orderBy,
+        'recordsPerPage' => $recordsPerPage,
+];
+
 ?>
 <h1 class="mt-5">USERS</h1>
 <div>
@@ -7,15 +22,15 @@ $page = $_SERVER['PHP_SELF'];
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col"><a href="<?=$page?>?orderBy=username">User Name</a></th>
-            <th scope="col"><a href="<?=$page?>?orderBy=age"">Age</a></th>
-            <th scope="col">Email</th>
-            <th scope="col">Codice Fiscale</th>
+            <th class="<?= $orderBy == 'username' ? $orderClass : '' ?>" scope="col"><a href="<?=$page?>?orderBy=username&orderDir=<?=$orderDir?>&recordsPerPage=<?=$recordsPerPage?>">User Name </a></th>
+            <th class="<?= $orderBy == 'age' ? $orderClass : '' ?>" scope="col"><a href="<?=$page?>?orderBy=age&orderDir=<?=$orderDir?>&recordsPerPage=<?=$recordsPerPage?>">Age</a></th>
+            <th class="<?= $orderBy == 'email' ? $orderClass : '' ?>" scope="col"><a href="<?=$page?>?orderBy=email&orderDir=<?=$orderDir?>&recordsPerPage=<?=$recordsPerPage?>">Email</a></th>
+            <th class="<?= $orderBy == 'codice_fiscale' ? $orderClass : '' ?>" scope="col"><a href="<?=$page?>?orderBy=codice_fiscale&orderDir=<?=$orderDir?>&recordsPerPage=<?=$recordsPerPage?>">Codice Fiscale</a></th>
         </tr>
         </thead>
         <tbody>
         <?php $index = 1;?>
-        <?php foreach (getUsers($conn, $params = []) as $user ) { ?>
+        <?php foreach (getUsers($conn, $params) as $user ) { ?>
             <tr>
 
                 <th scope="row"><?= $index?></th>

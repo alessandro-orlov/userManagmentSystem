@@ -77,9 +77,16 @@ function insertNewUser($totale, mysqli $conn)
 function getUsers(mysqli $conn, array $params = [], int $limit = 10) {
     $records = [];
 
-    $orderBy = getParams('orderBy', 'id');
+//    $orderBy = getParams('orderBy', 'id');
+//    $orderDir = getParams('orderDir', 'ASC');
 
-    $results = $conn->query("SELECT * FROM `users` ORDER BY $orderBy LIMIT $limit");
+    $orderBy = array_key_exists('orderBy', $params) ? $params['orderBy'] : 'id';
+    $orderDir = array_key_exists('orderDir', $params) ? $params['orderDir'] : 'ASC';
+    $recordsOnPage = array_key_exists('recordsPerPage', $params) ? $params['recordsPerPage'] : 10;
+
+    echo "SELECT * FROM `users` ORDER BY $orderBy $orderDir LIMIT $recordsOnPage";
+
+    $results = $conn->query("SELECT * FROM `users` ORDER BY $orderBy $orderDir LIMIT $recordsOnPage");
     while($row = $results->fetch_assoc()) {
         $records[] = $row;
     }

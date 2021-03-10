@@ -1,0 +1,30 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+th {
+    position: relative;
+    border: 1px solid #ccc;
+}
+th.ASC:after {
+    content: "\2193";
+    position: absolute;
+    right: 2px;
+    color: red;
+}
+
+th.DESC:after {
+    content: '\2191';
+    position: absolute;
+    right: 2px;
+    color: red;
+}

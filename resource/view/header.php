@@ -25,8 +25,15 @@
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" id="searchForm" action="<?= $page ?>">
+                    <select class="form-control" name="recordsPerPage" id="recordsPerPage" onchange="document.forms.searchForm.submit()" >
+                        <option value="5">Seleziona</option>
+                        <option <?= $_REQUEST['recordsPerPage'] == 5 ? 'selected': '' ; ?> value="5">5</option>
+                        <option <?= $_REQUEST['recordsPerPage'] == 10 ? 'selected': '' ; ?> value="10">10</option>
+                        <option <?= $_REQUEST['recordsPerPage'] == 15 ? 'selected': '' ; ?> value="15">15</option>
+                        <option <?= $_REQUEST['recordsPerPage'] == 20 ? 'selected': '' ; ?> value="20">20</option>
+                    </select>
+                    <input style="margin-left: 5px;" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
