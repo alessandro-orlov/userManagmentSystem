@@ -2,6 +2,23 @@
 include __DIR__.'/helper_functions.php';
 
 $page = $_SERVER['PHP_SELF'];
+$recordsPerPageValues = [5,10,15,20,40];
+
+$recordsPerPage = getParams('recordsPerPage', 10);
+
+$orderDir = getParams('orderDir', 'DESC' );
+$orderClass = $orderDir;
+$orderDir = $orderDir == "ASC" ? "DESC" : "ASC";
+
+$orderBy = getParams('orderBy', 'id');
+$searchUsers = getParams('searchUsers', '');
+$params = [
+    'orderDir' => $orderDir,
+    'orderBy' => $orderBy,
+    'recordsPerPage' => $recordsPerPage,
+    'searchUsers' => $searchUsers,
+];
+
 
 ?>
 <!doctype html>

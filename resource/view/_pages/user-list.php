@@ -1,19 +1,6 @@
 <?php
 
-$recordsPerPage = getParams('recordsPerPage', 10);
-$orderDir = getParams('orderDir', 'DESC' );
 
-$orderClass = $orderDir;
-
-$orderDir = $orderDir == "ASC" ? "DESC" : "ASC";
-
-$orderBy = getParams('orderBy', 'id');
-
-$params = [
-        'orderDir' => $orderDir,
-        'orderBy' => $orderBy,
-        'recordsPerPage' => $recordsPerPage,
-];
 
 ?>
 <h1 class="mt-5">USERS</h1>
@@ -44,5 +31,12 @@ $params = [
         <?php }?>
 
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <?php require_once __DIR__ . "/pagination.php" ?>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </div>

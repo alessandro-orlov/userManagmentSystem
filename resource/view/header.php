@@ -26,15 +26,20 @@
                     </li>
                 </ul>
                 <form class="d-flex" id="searchForm" action="<?= $page ?>">
-                    <select class="form-control" name="recordsPerPage" id="recordsPerPage" onchange="document.forms.searchForm.submit()" >
-                        <option value="5">Seleziona</option>
-                        <option <?= $_REQUEST['recordsPerPage'] == 5 ? 'selected': '' ; ?> value="5">5</option>
-                        <option <?= $_REQUEST['recordsPerPage'] == 10 ? 'selected': '' ; ?> value="10">10</option>
-                        <option <?= $_REQUEST['recordsPerPage'] == 15 ? 'selected': '' ; ?> value="15">15</option>
-                        <option <?= $_REQUEST['recordsPerPage'] == 20 ? 'selected': '' ; ?> value="20">20</option>
-                    </select>
-                    <input style="margin-left: 5px;" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+
+                        <select class="form-control" name="recordsPerPage" id="recordsPerPage" onchange="document.forms.searchForm.submit()" >
+                            <option value="5">Seleziona</option>
+                            <?php foreach ($recordsPerPageValues as $value ) {?>
+                                <option <?= $_REQUEST['recordsPerPage'] == $value ? 'selected': '' ; ?> value="<?=$value?>"><?= $value?></option>
+                            <?php } ?>
+                        </select>
+
+
+                        <input style="margin-left: 5px;" class="form-control me-2" id="searchUsers" name="searchUsers" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-warning" type="button">Reset</button>
+
+
                 </form>
             </div>
         </div>

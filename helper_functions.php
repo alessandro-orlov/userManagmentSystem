@@ -83,10 +83,20 @@ function getUsers(mysqli $conn, array $params = [], int $limit = 10) {
     $orderBy = array_key_exists('orderBy', $params) ? $params['orderBy'] : 'id';
     $orderDir = array_key_exists('orderDir', $params) ? $params['orderDir'] : 'ASC';
     $recordsOnPage = array_key_exists('recordsPerPage', $params) ? $params['recordsPerPage'] : 10;
+    $searchValue = array_key_exists('searchUsers', $params) ? $params['searchUsers'] : '' ;
 
-    echo "SELECT * FROM `users` ORDER BY $orderBy $orderDir LIMIT $recordsOnPage";
+    $searchValueEscape = $conn->escape_string($searchValue);
+    $where = '';;
+    if ($searchValue != '') {
+        $where = "WHERE username LIKE '%$searchValueEscape%'
+                    OR email LIKE '%$searchValueEscape%'
+                    OR age LIKE '%$searchValueEscape%'
+                    OR codice_fiscale LIKE '%$searchValueEscape%'";
+    }
+    echo "SELECT * FROM `users` $where ORDER BY $orderBy $orderDir LIMIT $recordsOnPage" . "<br>";
+    echo $searchValueEscape;
 
-    $results = $conn->query("SELECT * FROM `users` ORDER BY $orderBy $orderDir LIMIT $recordsOnPage");
+    $results = $conn->query("SELECT * FROM `users` $where ORDER BY $orderBy $orderDir LIMIT $recordsOnPage");
     while($row = $results->fetch_assoc()) {
         $records[] = $row;
     }
